@@ -48,6 +48,7 @@ target_link_libraries(${PROJECT} my_prints)
 
 INSTALL(PROGRAMS
     $<TARGET_FILE:${PROJECT}> # ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
+    $<TARGET_FILE:my_prints>
         DESTINATION bin)
 
 # Define ALL_TARGETS variable to use in PVS and Sanitizers
