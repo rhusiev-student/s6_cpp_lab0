@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # Pipeline
-set(PROJECT my_prints)
+set(PROJECT prints_the_incomprehensible)
 set(ENABLE_PVS_STUDIO OFF)
 set(ENABLE_UBSan OFF)
 set(ENABLE_ASAN OFF)
@@ -26,14 +26,15 @@ include(cmake/CompilerWarnings.cmake)
 #! Export compile_commands.json for lsps
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-#! Project main executable source compilation
 file(GLOB SOURCES
-     "src/*.cpp"
+     "src/my_*.cpp"
 )
-add_executable(${PROJECT} ${SOURCES})
+add_library(my_prints STATIC ${SOURCES})
+target_include_directories(my_prints PRIVATE include)
 
-#! Put path to your project headers
+add_executable(${PROJECT} src/main.cpp)
 target_include_directories(${PROJECT} PRIVATE include)
+target_link_libraries(${PROJECT} my_prints)
 
 #! Add external packages
 # options_parser requires boost::program_options library
